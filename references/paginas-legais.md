@@ -20,7 +20,7 @@ placeholders e uma lista de pontos que costumam ser obrigatórios — **não** s
 um(a) advogado(a) e **não** garante conformidade legal.
 
 - **VETADO** apresentar qualquer minuta legal como "pronta para publicar".
-- Todo texto legal gerado sai marcado `[REVISAR: advogado]` nos pontos que exigem decisão jurídica.
+- Toda página legal gerada abre com o banner `[REVISAR: advogado]` e leva a marca também em cada ponto que exige decisão jurídica. O go-live reprova qualquer `[REVISAR` ainda visível no HTML público.
 - A **responsabilidade jurídica** do conteúdo publicado é do **dono do site**, que deve submeter as
   páginas a **revisão por advogado(a)** antes de ir ao ar.
 - As leis variam por país/estado e mudam com o tempo. O foco aqui é **Brasil/LGPD** (base padrão da
@@ -91,7 +91,7 @@ O **contrato** do serviço/produto: o que é entregue, obrigações das partes, 
 
 **Pontos OBRIGATÓRIOS (piso da skill — a página não fecha sem eles):**
 1. **Controlador**: quem trata os dados (razão social, CNPJ, contato).
-2. **Encarregado / DPO**: nome/canal de contato do encarregado (art. 41 LGPD).
+2. **Encarregado / DPO**: nome/canal de contato do encarregado, publicados no site (art. 41 LGPD). Incluir também o canal para reclamação à ANPD e o registro do consentimento. `[REVISAR: advogado]`
 3. **Dados coletados**: quais dados pessoais (cadastro, navegação, cookies, formulários).
 4. **Finalidade**: para que cada dado é usado.
 5. **Base legal**: o fundamento do art. 7º LGPD para cada tratamento (consentimento, execução de
@@ -102,12 +102,14 @@ O **contrato** do serviço/produto: o que é entregue, obrigações das partes, 
 9. **Segurança**: medidas de proteção (em linhas gerais).
 10. **Direitos do titular** (art. 18): confirmação, acesso, correção, anonimização, portabilidade,
     eliminação, informação sobre compartilhamento, revogação de consentimento — **e como exercê-los**
-    (canal + prazo).
+    (canal + prazo de resposta ao titular; confirmar o prazo vigente com o jurídico). `[REVISAR: advogado]`
 11. **Cookies**: referência à Política de Cookies.
 12. **Menores**: tratamento de dados de crianças/adolescentes (art. 14), se aplicável. `[REVISAR: advogado]`
 13. **Alterações** da política e **data de vigência**.
 
-> Sem os pontos 1–13 (mínimo: controlador, encarregado, dados, finalidade, base legal, retenção,
+> Verificar com o advogado a norma vigente (inclusive legislação sobre menores, ex.: ECA Digital, e o guia de cookies da ANPD); a skill não afirma vigência. `[REVISAR: advogado]`
+>
+> Sem os pontos 1–13 (piso para marcar "pronta" = os 13 pontos; o go-live exige no mínimo controlador, encarregado, finalidade, base legal, direitos do titular e vigência; ainda: dados, retenção,
 > direitos e como exercê-los), a página **não é marcada como pronta**. Ainda assim, `[REVISAR: advogado]`.
 
 ---
@@ -134,7 +136,7 @@ finalidade, o opt-in, o modo sem cookie e a revogação do analytics são de
 ## 5. Política de Devolução (`/legal/devolucao`) — se e-commerce
 
 Troca e devolução de produtos/serviços. No BR, ver **direito de arrependimento** (CDC art. 49: 7
-dias em compra fora do estabelecimento). `[REVISAR: advogado]`
+dias em compra fora do estabelecimento). Para e-commerce, também identificação do fornecedor (razão social, CNPJ, endereço, canal de atendimento) visível no site/rodapé (decreto do comércio eletrônico: o advogado confirma o texto vigente). `[REVISAR: advogado]`
 
 **Seções (scaffold)**
 1. Prazo de devolução/troca e condições (produto sem uso, embalagem etc.).

@@ -12,3 +12,5 @@ Gere o handoff do site institucional **sem** compactar — pra fim de sessão ou
    checklist de inventário de `references/arquitetura-informacao.md` + legais pendentes de revisão).
 
 Não rode `/compact` — só arquiva.
+
+Depois de gravar, **commit + push na hora** (piso 22); sem remote/push, não está concluído.

@@ -41,7 +41,12 @@ def pagina(caminho, c):
         partes.append('<script type="application/ld+json">{"@context":"https://schema.org","@type":"%s"}</script>' % c.get('ld_tipo', 'Organization'))
     partes.append('</head><body>')
     if c.get('sem_h1') != caminho: partes.append('<h1>%s</h1>' % caminho)
-    partes.append('<p>conteudo</p><a href="/">home</a></body></html>')
+    corpo = 'conteudo'
+    if caminho == '/legal/privacidade' and not c.get('privacidade_vazia'):
+        corpo = 'Controlador: Empresa. Encarregado (DPO): x@y. Finalidade e base legal por dado. Direitos do titular (art. 18). Vigencia: 2026-01-01.'
+    if c.get('revisar') == caminho: corpo += ' [REVISAR: advogado]'
+    rodape = '' if c.get('sem_link_legal') and caminho == '/' else '<footer><a href="/legal">Legal</a></footer>'
+    partes.append('<p>%s</p><a href="/">home</a>%s</body></html>' % (corpo, rodape))
     return ''.join(partes)
 
 class H(BaseHTTPRequestHandler):
@@ -68,7 +73,7 @@ class H(BaseHTTPRequestHandler):
             if c.get('sitemap_url_morta'):
                 locs += '<url><loc>%s/pagina-morta</loc></url>' % base
             return self.responde(200, '<?xml version="1.0"?><urlset>%s</urlset>' % locs, 'application/xml')
-        if p in PAGINAS:
+        if p in PAGINAS or (p in ('/legal/devolucao', '/legal/frete', '/legal/estorno') and c.get('ecommerce_existe')):
             return self.responde(200, pagina(p, c))
         if c.get('soft404'):
             return self.responde(200, '<html><head><title>Nao encontrado</title></head><body><h1>Ops</h1><a href="/">voltar</a></body></html>')
@@ -120,6 +125,13 @@ checa "canonical para outro host reprova" 1 "canonical cruzado" '{"canonical_out
 checa "titulo duplicado reprova" 1 "canibalizacao dentro do proprio site" '{"titulo_duplicado": true}'
 checa "sem <title> reprova" 1 "sem <title>" '{"sem_titulo": "/legal"}'
 checa "sem <h1> reprova" 1 "sem <h1>" '{"sem_h1": "/servicos"}'
+
+echo "== piso legal/LGPD =="
+checa "[REVISAR visivel no HTML publico reprova" 1 "REVISAR" '{"revisar": "/legal/termos-de-uso"}'
+checa "privacidade vazia reprova" 1 "pontos minimos de LGPD" '{"privacidade_vazia": true}'
+checa "home sem link para /legal reprova" 1 "sem link para /legal" '{"sem_link_legal": true}'
+cfg '{}'; saida="$(node "$GATE" "$BASE" --ecommerce 2>&1)"; rc=$?
+if [ $rc = 1 ] && grep -q "devolucao" <<<"$saida"; then echo "  ✔ --ecommerce exige /legal/devolucao"; ok=$((ok+1)); else echo "  ✖ --ecommerce"; fail=$((fail+1)); fi
 
 echo "== rich results mortos =="
 checa "FAQPage no JSON-LD reprova" 1 "FAQPage" '{"ld": "/contato", "ld_tipo": "FAQPage"}'

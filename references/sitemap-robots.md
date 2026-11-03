@@ -29,7 +29,7 @@ real. **VETADO** — URL 404/redirect/`noindex` no sitemap; canonical cruzado en
 
 Levam `<meta name="robots" content="noindex,follow">` e ficam fora do sitemap. No `robots.txt`
 (`Allow: /`, `Disallow` só do privado/inútil, `Sitemap:` absoluto) **VETADO** `Disallow: /` em
-produção — e `Disallow` não é `noindex` (o crawler precisa ler a meta).
+produção — e `Disallow` não é `noindex` (o crawler precisa ler a meta). Página que deve sair do índice leva `noindex` (meta ou `X-Robots-Tag`) **sem** `Disallow`; `Disallow` só para o privado/inútil.
 
 ## hreflang
 

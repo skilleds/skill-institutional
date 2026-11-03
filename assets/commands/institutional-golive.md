@@ -44,7 +44,7 @@ responde `200` · URL de **outro host** (o sitemap do domínio de teste viajou) 
 bash .claude/skills/schematize-institutional/scripts/go-live.test.sh
 ```
 
-17 casos contra um site falso servido **de verdade por HTTP** (não mock) — 15 deles quebrados de
+25 casos contra um site falso servido **de verdade por HTTP** (não mock) — a maioria quebrados de
 propósito.
 
 ## Depois do verde

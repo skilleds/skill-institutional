@@ -95,7 +95,7 @@ depoimento, prêmio ou dado que não foi fornecido.
 4. **Redes sociais**.
 
 **Checklist**
-- [ ] Canais reais e testados (e-mail que existe, telefone que atende).
+- [ ] Canais reais e testados (e-mail que existe, telefone que atende; teste em prd com 1 mensagem, fora de prd só sink: piso 18).
 - [ ] Formulário com **consentimento** e link à Política de Privacidade (LGPD).
 - [ ] `ContactPage` + `ContactPoint` no JSON-LD; `LocalBusiness` se há endereço.
 - [ ] Página de sucesso (`obrigado`) é `noindex` (ver `sitemap-robots.md`).

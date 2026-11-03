@@ -7,12 +7,14 @@
 // exatamente os que ninguem ve na revisao visual: o `Disallow: /` do staging que viajou, o
 // `noindex` esquecido, o soft-404 que devolve 200, o canonical apontando para o dominio de teste.
 //
-// uso: go-live.mjs <base-url> [--paginas paginas.txt] [--json] [--sem-rede-externa]
+// uso: go-live.mjs <base-url> [--paginas paginas.txt] [--ecommerce] [--json] [--sem-rede-externa]
 //      exit 0 = pode subir · 1 = REPROVA · 2 = uso errado / site inalcancavel
 const BASE_PADRAO = [
   '/', '/sobre', '/servicos', '/contato', '/legal', '/legal/termos-de-uso',
   '/legal/termos-de-servico', '/legal/privacidade', '/legal/cookies', '/mapa-do-site',
 ]
+
+const LEGAIS_ECOMMERCE = ['/legal/devolucao', '/legal/frete', '/legal/estorno']
 
 const argv = process.argv.slice(2)
 const opt = (k) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined }
@@ -50,6 +52,7 @@ if (arqPaginas) {
   paginas = readFileSync(arqPaginas, 'utf8').split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#'))
   if (!paginas.length) { console.error(`✖ ${arqPaginas} sem nenhuma pagina — lista vazia nao e baseline cumprido`); process.exit(2) }
 }
+if (argv.includes('--ecommerce')) for (const p of LEGAIS_ECOMMERCE) if (!paginas.includes(p)) paginas = [...paginas, p]
 const respostas = new Map()
 for (const p of paginas) {
   const r = await pegar(p)
@@ -125,6 +128,16 @@ for (const [p, r] of respostas) {
   const robotsMeta = (html.match(/<meta[^>]+name=["']robots["'][^>]*content=["']([^"']+)["']/i) || [, ''])[1]
   const desc = (html.match(/<meta[^>]+name=["']description["'][^>]*content=["']([^"']*)["']/i) || [, ''])[1]
 
+  // Scaffold legal cru nao sobe: placeholder `[REVISAR: ...]` visivel = texto sem revisao juridica/negocio.
+  if (/\[REVISAR/i.test(html)) reprova(`${p}: marca [REVISAR ...] visivel no HTML publico — texto legal sem revisao (piso 1) nao vai ao ar`)
+  // Privacidade com os pontos minimos de LGPD (piso 2): placeholder vazio nao e politica.
+  if (p === '/legal/privacidade') {
+    const txt = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/gi, ' ').toLowerCase()
+    const exigidos = [['controlador', /controlador/], ['encarregado/DPO', /encarregad|dpo/], ['finalidade', /finalidade/],
+      ['base legal', /base legal|bases legais/], ['direitos do titular (art. 18)', /art\.?\s*18|direitos do titular/], ['vigencia/data', /vig[eê]ncia|atualizad|\d{2}\/\d{2}\/\d{4}|\d{4}-\d{2}-\d{2}/]]
+    const falta = exigidos.filter(([, re]) => !re.test(txt)).map(([n]) => n)
+    if (falta.length) reprova(`${p}: privacidade sem os pontos minimos de LGPD: ${falta.join(', ')}`)
+  }
   if (!titulo) reprova(`${p}: sem <title>`)
   else if (titulos.has(titulo)) reprova(`${p}: <title> duplicado com ${titulos.get(titulo)} — titulo repetido e canibalizacao dentro do proprio site`)
   else titulos.set(titulo, p)
@@ -152,6 +165,7 @@ for (const [p, r] of respostas) {
     const noSitemap = urls.some(u => { try { return new URL(u).pathname.replace(/\/$/, '') === (p === '/' ? '' : p.replace(/\/$/, '')) } catch { return false } })
     if (!noSitemap) reprova(`${p}: pagina do baseline FORA do sitemap`)
   }
+  if (p === '/' && !/href=["'][^"']*\/legal(["'/#?])/i.test(html)) reprova('/: sem link para /legal (rodape) — a pagina legal tem de estar a um clique de qualquer pagina')
   if (/(src|href)=["']http:\/\//i.test(html) && raiz.startsWith('https')) {
     avisos.push(`${p}: recurso em http:// numa pagina https (conteudo misto)`)
   }

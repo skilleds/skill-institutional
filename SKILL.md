@@ -79,13 +79,15 @@ Mapa de references — leia o que casa com a tarefa:
 | **Dados estruturados (schema.org/JSON-LD) por tipo de página**: Organization + WebSite, BreadcrumbList, LocalBusiness, Service/Product, ContactPoint, Article/BlogPosting — blocos de referência prontos | `references/dados-estruturados.md` |
 | **Sitemap.xml + robots.txt + hreflang** gerados a partir do inventário, canonical self, o essencial pra nascer indexável (o SEO fino remete à schematize-seo) | `references/sitemap-robots.md` |
 
+Gate de go-live: rode `scripts/go-live.mjs <url>` (`--ecommerce` para devolução/frete/estorno) antes de promover; reprova `[REVISAR` visível, privacidade sem os pontos de LGPD e rodapé sem `/legal`.
+
 ## Pisos inegociáveis (vetam o atalho)
 
 Independente do reference, estes limites nunca são cruzados:
 
 1. **Conteúdo legal é SCAFFOLD, não aconselhamento jurídico.** Esta skill provê a **estrutura** das
    páginas legais (seções, placeholders, pontos obrigatórios), **nunca** o texto jurídico final
-   como se fosse válido. Todo texto legal sai marcado `[REVISAR: advogado]` e **exige revisão por
+   como se fosse válido. Toda página legal abre com o banner `[REVISAR: advogado]` (mais as marcas por ponto) e **exige revisão por
    um(a) advogado(a)** antes de publicar. **VETADO** apresentar minuta legal como pronta para
    produção. A responsabilidade jurídica é do dono do site, não da skill.
 2. **Privacidade e cookies só fecham com os pontos de LGPD.** A Política de Privacidade precisa de:
@@ -174,3 +176,5 @@ Independente do reference, estes limites nunca são cruzados:
 - **schematize-engineering** — a **BASE** (archive §28, índice/MAPA §39, DoD §35). Se o site tiver
   backend (formulário de contato que grava, newsletter, área logada), o back **delega** ao
   `engineering`/linguagem; o front, à `web`.
+
+Herda os pisos 22–29 da `schematize-engineering` (git como trava de conclusão, deploy só do git, ops é o gate da IA, sem agents inúteis, relatório 30 min/handoff 6 h, CI remoto só antes do hml, microserviço autônomo, build em dev/hml + higiene).

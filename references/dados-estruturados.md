@@ -16,7 +16,7 @@
 > continua existindo como Q&A **visível** em HTML (`<h2>`/`<details>` ou lista) e a busca interna
 > continua existindo; só a marcação sai.
 
-Convenção: **MUST** = regra; **VETADO** = piso. Substitua `EMPRESA`, `https://exemplo.com.br`,
+Convenção: **MUST** = regra; **VETADO** = piso. Substitua `EMPRESA`, `https://exemplo.example`,
 `[...]` pelos dados reais. **Todo campo do markup precisa existir VISÍVEL na página.**
 
 ---
@@ -56,11 +56,11 @@ Identidade da empresa. Uma vez, reusada por `@id` em todo o site. Inclui o `Cont
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://exemplo.com.br/#org",
+  "@id": "https://exemplo.example/#org",
   "name": "EMPRESA",
   "legalName": "EMPRESA LTDA",
-  "url": "https://exemplo.com.br",
-  "logo": "https://exemplo.com.br/logo.png",
+  "url": "https://exemplo.example",
+  "logo": "https://exemplo.example/logo.png",
   "description": "[o que a empresa faz, 1 frase]",
   "sameAs": [
     "https://www.linkedin.com/company/EMPRESA",
@@ -69,7 +69,7 @@ Identidade da empresa. Uma vez, reusada por `@id` em todo o site. Inclui o `Cont
   "contactPoint": [{
     "@type": "ContactPoint",
     "contactType": "customer support",
-    "email": "contato@exemplo.com.br",
+    "email": "contato@exemplo.example",
     "telephone": "+55-11-0000-0000",
     "areaServed": "BR",
     "availableLanguage": ["Portuguese"]
@@ -87,11 +87,11 @@ Identidade da empresa. Uma vez, reusada por `@id` em todo o site. Inclui o `Cont
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://exemplo.com.br/#website",
-  "url": "https://exemplo.com.br",
+  "@id": "https://exemplo.example/#website",
+  "url": "https://exemplo.example",
   "name": "EMPRESA",
   "inLanguage": "pt-BR",
-  "publisher": { "@id": "https://exemplo.com.br/#org" }
+  "publisher": { "@id": "https://exemplo.example/#org" }
 }
 ```
 
@@ -108,9 +108,9 @@ Espelha o breadcrumb **visível**. Exemplo para `/servicos/consultoria`:
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://exemplo.com.br/" },
-    { "@type": "ListItem", "position": 2, "name": "Serviços", "item": "https://exemplo.com.br/servicos" },
-    { "@type": "ListItem", "position": 3, "name": "Consultoria", "item": "https://exemplo.com.br/servicos/consultoria" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://exemplo.example/" },
+    { "@type": "ListItem", "position": 2, "name": "Serviços", "item": "https://exemplo.example/servicos" },
+    { "@type": "ListItem", "position": 3, "name": "Consultoria", "item": "https://exemplo.example/servicos/consultoria" }
   ]
 }
 ```
@@ -124,8 +124,8 @@ Espelha o breadcrumb **visível**. Exemplo para `/servicos/consultoria`:
   "@context": "https://schema.org",
   "@type": "ItemList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "url": "https://exemplo.com.br/servicos/consultoria", "name": "Consultoria" },
-    { "@type": "ListItem", "position": 2, "url": "https://exemplo.com.br/servicos/implantacao", "name": "Implantação" }
+    { "@type": "ListItem", "position": 1, "url": "https://exemplo.example/servicos/consultoria", "name": "Consultoria" },
+    { "@type": "ListItem", "position": 2, "url": "https://exemplo.example/servicos/implantacao", "name": "Implantação" }
   ]
 }
 ```
@@ -140,9 +140,9 @@ Espelha o breadcrumb **visível**. Exemplo para `/servicos/consultoria`:
   "@type": "Service",
   "name": "Consultoria",
   "serviceType": "Consultoria em [área]",
-  "url": "https://exemplo.com.br/servicos/consultoria",
+  "url": "https://exemplo.example/servicos/consultoria",
   "description": "[o que o serviço entrega]",
-  "provider": { "@id": "https://exemplo.com.br/#org" },
+  "provider": { "@id": "https://exemplo.example/#org" },
   "areaServed": { "@type": "Country", "name": "Brasil" }
 }
 ```
@@ -155,14 +155,14 @@ Se for **produto** com preço público na página, use `Product` + `Offer`:
   "@type": "Product",
   "name": "[Produto]",
   "description": "[descrição]",
-  "url": "https://exemplo.com.br/servicos/produto",
-  "brand": { "@id": "https://exemplo.com.br/#org" },
+  "url": "https://exemplo.example/servicos/produto",
+  "brand": { "@id": "https://exemplo.example/#org" },
   "offers": {
     "@type": "Offer",
     "price": "199.00",
     "priceCurrency": "BRL",
     "availability": "https://schema.org/InStock",
-    "url": "https://exemplo.com.br/servicos/produto"
+    "url": "https://exemplo.example/servicos/produto"
   }
 }
 ```
@@ -178,10 +178,10 @@ está na tela.
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://exemplo.com.br/#local",
+  "@id": "https://exemplo.example/#local",
   "name": "EMPRESA",
-  "image": "https://exemplo.com.br/fachada.jpg",
-  "url": "https://exemplo.com.br/onde-estamos",
+  "image": "https://exemplo.example/fachada.jpg",
+  "url": "https://exemplo.example/onde-estamos",
   "telephone": "+55-11-0000-0000",
   "address": {
     "@type": "PostalAddress",
@@ -212,9 +212,9 @@ e geo reais. Use o subtipo mais específico de `LocalBusiness` quando existir (e
 {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "url": "https://exemplo.com.br/contato",
+  "url": "https://exemplo.example/contato",
   "name": "Contato — EMPRESA",
-  "about": { "@id": "https://exemplo.com.br/#org" }
+  "about": { "@id": "https://exemplo.example/#org" }
 }
 ```
 
@@ -229,13 +229,13 @@ O `ContactPoint` detalhado vive no `Organization` (acima). Não duplicar telefon
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "[Título ≤ 110 chars]",
-  "url": "https://exemplo.com.br/blog/[slug]",
+  "url": "https://exemplo.example/blog/[slug]",
   "datePublished": "2026-01-01",
   "dateModified": "2026-01-05",
   "inLanguage": "pt-BR",
-  "author": { "@type": "Person", "name": "[Autor real]", "url": "https://exemplo.com.br/autores/[slug]" },
-  "publisher": { "@id": "https://exemplo.com.br/#org" },
-  "image": "https://exemplo.com.br/blog/[slug]/capa.jpg"
+  "author": { "@type": "Person", "name": "[Autor real]", "url": "https://exemplo.example/autores/[slug]" },
+  "publisher": { "@id": "https://exemplo.example/#org" },
+  "image": "https://exemplo.example/blog/[slug]/capa.jpg"
 }
 ```
 
@@ -251,10 +251,10 @@ O `ContactPoint` detalhado vive no `Organization` (acima). Não duplicar telefon
   "@type": "JobPosting",
   "title": "[Cargo]",
   "description": "[HTML da descrição da vaga]",
-  "datePosted": "2026-01-01",
-  "validThrough": "2026-03-01T23:59",
+  "datePosted": "AAAA-MM-DD",
+  "validThrough": "AAAA-MM-DDT23:59",
   "employmentType": "FULL_TIME",
-  "hiringOrganization": { "@id": "https://exemplo.com.br/#org" },
+  "hiringOrganization": { "@id": "https://exemplo.example/#org" },
   "jobLocation": {
     "@type": "Place",
     "address": { "@type": "PostalAddress", "addressLocality": "São Paulo", "addressRegion": "SP", "addressCountry": "BR" }
@@ -276,8 +276,8 @@ vários `<script>`. Não misture tipos soltos no mesmo objeto.
 {
   "@context": "https://schema.org",
   "@graph": [
-    { "@type": "Organization", "@id": "https://exemplo.com.br/#org", "name": "EMPRESA", "url": "https://exemplo.com.br" },
-    { "@type": "WebSite", "@id": "https://exemplo.com.br/#website", "url": "https://exemplo.com.br", "publisher": { "@id": "https://exemplo.com.br/#org" } }
+    { "@type": "Organization", "@id": "https://exemplo.example/#org", "name": "EMPRESA", "url": "https://exemplo.example" },
+    { "@type": "WebSite", "@id": "https://exemplo.example/#website", "url": "https://exemplo.example", "publisher": { "@id": "https://exemplo.example/#org" } }
   ]
 }
 ```

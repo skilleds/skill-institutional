@@ -60,12 +60,12 @@ Os pontos de input (colha do que existir; o que faltar vira `[REVISAR: negócio]
 
 ## Passo 5 — Sitemap + robots + hreflang (`references/sitemap-robots.md`)
 - Derive o **sitemap.xml** do inventário (só URLs indexáveis, absolutas, canônicas, 200).
-- Escreva o **robots.txt** (allow + disallow do que é `noindex` + `Sitemap:` absoluto).
+- Escreva o **robots.txt** (`Allow` + `Disallow` só do privado/inútil + `Sitemap:` absoluto; o que é `noindex` leva a meta/`X-Robots-Tag` e **não** entra no `Disallow`, senão o crawler nunca lê a meta).
 - Marque cada página com **canonical self**; se multi-idioma, gere **hreflang recíproco + x-default**.
 - Liste o que fica **`noindex`** (obrigado/busca/privado).
 
 ## Passo 6 — Gravar e delegar
-- Grave inventário + templates + JSON-LD + sitemap/robots no **`<projeto>_archive/`** (o rastro).
+- Grave inventário + templates + JSON-LD + sitemap/robots no **`<projeto>_archive/`** (o rastro; o archive guarda o inventário, a geração do sitemap/robots é do runtime da web) e faça **commit + push na hora** (piso 22).
 - **Delegue:** a implementação no front (Next/Astro, RSC, a11y, CWV, i18n em runtime, injeção do
   JSON-LD, `app/sitemap.ts`) → **`schematize-web`** (`/web-*`); a estratégia de SEO (keywords,
   on-page fino, multi-domínio, AIO, medição) → **`schematize-seo`** (`/seo-*`).
