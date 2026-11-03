@@ -4,7 +4,7 @@ Todas as mudanças relevantes deste pacote, no formato [Keep a Changelog](https:
 com versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
 
-## [Não lançado]
+## [0.6.0] — 2026-11-03
 ### Corrigido
 - go-live: reprova `[REVISAR` visível no HTML público, privacidade sem pontos mínimos de LGPD e home sem link `/legal`; `--ecommerce` exige devolução/frete/estorno (+4 testes vermelho→verde).
 - Scaffold: `noindex` sem `Disallow`; banner `[REVISAR: advogado]` por página; pontos legais/LGPD adicionais (marcados para o advogado); `skill.toml` sem FAQPage; exemplos em `.example`, `JobPosting` sem datas vencidas; handoff/scaffold com commit+push (piso 22).
